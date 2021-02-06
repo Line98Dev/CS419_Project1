@@ -9,4 +9,16 @@ import java.util.*;
 public class SJF implements Algorithm
 {
 
+    public SJF(List<Task> queue) {
+    }
+
+    @Override
+    public void schedule() {
+        
+    }
+
+    @Override
+    public Task pickNextTask() {
+        return null;
+    }
 }
