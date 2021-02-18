@@ -12,10 +12,10 @@ import static java.lang.Integer.min;
 
 public class RR implements Algorithm
 {
-    int quantumTime = 5;
+    int quantumTime = 10;
     private final List<Task> queue;
     private final int numTasks;
-    private int[] waitTimes;
+    private final int[] waitTimes;
     private int[] lastRunFinished;
 
     public RR(List<Task> queue) {
@@ -42,8 +42,6 @@ public class RR implements Algorithm
         while (!queue.isEmpty()) {
             currentTask = pickNextTask();
 
-//            if (waitTimes[currentTask.getTid()] == null) {
-//            }
             waitTimes[currentTask.getTid()] += (CPU.getCurrentTime() - lastRunFinished[currentTask.getTid()]);
             int runTime = min(currentTask.getBurst(), quantumTime);
             CPU.run(currentTask, runTime);
@@ -66,8 +64,8 @@ public class RR implements Algorithm
 
     private int calculateTotalWaitTime() {
         int total = 0;
-        for (int index = 0; index < waitTimes.length - 1; index++){
-            total += waitTimes[index];
+        for (int waitTime : waitTimes) {
+            total += waitTime;
         }
         return total;
     }
